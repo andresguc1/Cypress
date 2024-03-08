@@ -1,0 +1,23 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "Learning Cypress Automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andresguc1/Cypress.git"
+  },
+  "keywords": [
+    "cypress",
+    "automation"
+  ],
+  "author": "Andresguc1",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andresguc1/Cypress/issues"
+  },
+  "homepage": "https://github.com/andresguc1/Cypress#readme"
+}
