@@ -28,9 +28,34 @@ describe("The Home page should be load correctly", () => {
     cy.get("#elements > :nth-child(1)").click();
   });
 
-  it.only("The basic authentication login works is available and works correctly", () => {
+  it("The basic authentication login works is available and works correctly", () => {
     cy.visit("https://admin:admin@the-internet.herokuapp.com/basic_auth");
     cy.get("p").should("include.text", "Congratulations");
+  });
+
+  it('Should identify broken images', () => {
+    // Select all images on the page
+    cy.get('img').each(($img) => {
+      // Get the image source
+      const src = $img.attr('src');
+
+      // Check if the image source is not empty
+      if (src) {
+        // Load the image URL
+        cy.request({
+          url: src,
+          failOnStatusCode: false // Do not fail the test for non-2xx or non-3xx status codes
+        }).then((response) => {
+          // Check if the response status is not 404 (Not Found)
+          if (response.status !== 404) {
+            expect(response.status).to.be.oneOf([200, 300]); // Expecting successful status codes
+          }
+        });
+      } else {
+        // If image source is empty, fail the test
+        throw new Error('Image source is empty');
+      }
+    });
   });
 
   it("The login form works is available and works correctly", () => {
