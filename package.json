@@ -4,7 +4,8 @@
   "description": "Learning Cypress Automation",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npx cypress run",
+    "dev": "npm run main.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/andresguc1/Cypress/issues"
   },
-  "homepage": "https://github.com/andresguc1/Cypress#readme"
+  "homepage": "https://github.com/andresguc1/Cypress#readme",
+  "dependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.6"
+  }
 }
