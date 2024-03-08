@@ -13,19 +13,24 @@ describe("The Home page should be load correctly", () => {
     cy.get("h3").contains("A/B Test");
   });
 
-  it.only("The add remove elements works correctly", () => {
+  it("The add remove elements works correctly", () => {
     cy.get("a").should("exist").contains("Add/Remove Elements").click();
     cy.get("h3").contains("Add/Remove Elements");
 
     cy.get("button").should("exist").contains("Add Element").click();
-    cy.get('#elements > :nth-child(1)').should("be.visible")
+    cy.get("#elements > :nth-child(1)").should("be.visible");
     cy.get("button").should("exist").contains("Add Element").click();
-    cy.get('#elements > :nth-child(2)').should("be.visible")
+    cy.get("#elements > :nth-child(2)").should("be.visible");
     cy.get("button").should("exist").contains("Add Element").click();
-    cy.get('#elements > :nth-child(3)').should("be.visible")
-    cy.get('#elements > :nth-child(1)').click()
-    cy.get('#elements > :nth-child(1)').click()
-    cy.get('#elements > :nth-child(1)').click()
+    cy.get("#elements > :nth-child(3)").should("be.visible");
+    cy.get("#elements > :nth-child(1)").click();
+    cy.get("#elements > :nth-child(1)").click();
+    cy.get("#elements > :nth-child(1)").click();
+  });
+
+  it.only("The basic authentication login works is available and works correctly", () => {
+    cy.visit("https://admin:admin@the-internet.herokuapp.com/basic_auth");
+    cy.get("p").should("include.text", "Congratulations");
   });
 
   it("The login form works is available and works correctly", () => {
