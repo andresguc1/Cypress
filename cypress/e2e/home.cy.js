@@ -33,18 +33,18 @@ describe("The Home page should be load correctly", () => {
     cy.get("p").should("include.text", "Congratulations");
   });
 
-  it('Should identify broken images', () => {
+  it("Should identify broken images", () => {
     // Select all images on the page
-    cy.get('img').each(($img) => {
+    cy.get("img").each(($img) => {
       // Get the image source
-      const src = $img.attr('src');
+      const src = $img.attr("src");
 
       // Check if the image source is not empty
       if (src) {
         // Load the image URL
         cy.request({
           url: src,
-          failOnStatusCode: false // Do not fail the test for non-2xx or non-3xx status codes
+          failOnStatusCode: false, // Do not fail the test for non-2xx or non-3xx status codes
         }).then((response) => {
           // Check if the response status is not 404 (Not Found)
           if (response.status !== 404) {
@@ -53,7 +53,7 @@ describe("The Home page should be load correctly", () => {
         });
       } else {
         // If image source is empty, fail the test
-        throw new Error('Image source is empty');
+        throw new Error("Image source is empty");
       }
     });
   });
@@ -68,5 +68,17 @@ describe("The Home page should be load correctly", () => {
       .should("exist")
       .contains("You logged into a secure area!");
     cy.get("h2").contains("Secure Area");
+  });
+
+  it.only("Should locate Challenging DOM", () => {
+    cy.get("a").should("exist").contains("Challenging DOM").click();
+    cy.get("h3").contains("Challenging DOM");
+    cy.get('.large-2.columns').find('a.button').eq(0).click()
+    cy.get('div.large-10.columns canvas#canvas').invoke('attr', 'width').then((width) => {
+      const canvasWidth = parseInt(width);
+      // Now you can use the canvasWidth variable as needed in your test
+      // For example, you can assert that the width is equal to a certain value
+      expect(canvasWidth).to.equal(599);
+    });
   });
 });
