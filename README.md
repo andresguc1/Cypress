@@ -7,6 +7,7 @@ This repository contains an example project to practice using Cypress, a modern 
 The project is designed to demonstrate how to set up and write tests using Cypress for a web application. It includes tests for various functionalities and scenarios using the following base URL:
 
 Base URL: [https://the-internet.herokuapp.com/entry_ad](https://the-internet.herokuapp.com/)
+(page related to automation testing practice)
 
 ## Getting Started
 
