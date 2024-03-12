@@ -1,4 +1,4 @@
-describe("The Home page should be load correctly", () => {
+describe("The Home page features should be works correctly", () => {
   beforeEach(() => {
     cy.visit("https://the-internet.herokuapp.com/");
   });
@@ -70,7 +70,7 @@ describe("The Home page should be load correctly", () => {
     cy.get("h2").contains("Secure Area");
   });
 
-  it.only("Should locate Challenging DOM", () => {
+  it("Should locate Challenging DOM", () => {
     cy.get("a").should("exist").contains("Challenging DOM").click();
     cy.get("h3").contains("Challenging DOM");
     cy.get('.large-2.columns').find('a.button').eq(0).click()
@@ -80,5 +80,14 @@ describe("The Home page should be load correctly", () => {
       // For example, you can assert that the width is equal to a certain value
       expect(canvasWidth).to.equal(599);
     });
+  });
+
+  it("Should the checkbox could be selected", () => {
+    cy.get("a").should("exist").contains("Checkboxes").click();
+    cy.get("h3").contains("Checkboxes");
+    cy.get('input[type="checkbox"]').eq('0').check();
+    cy.get('input[type="checkbox"]').should('be.checked');
+    cy.get('input[type="checkbox"]').eq('1').uncheck();
+    cy.get('input[type="checkbox"]').eq('1').should('not.be.checked');
   });
 });
