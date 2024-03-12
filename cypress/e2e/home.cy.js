@@ -3,21 +3,26 @@ function waitForTextToBeVisible(text) {
   cy.contains(text, { timeout: 10000 }).should("be.visible");
 }
 
+// This describes a suite of tests for the features on "The Internet" website
 describe("The Home page features should be works correctly", () => {
+  // Before each test case, visit the home page
   beforeEach(() => {
     cy.visit("https://the-internet.herokuapp.com/");
   });
 
+  // Test case to check the header titles on the home page
   it("the header display the correct tittles", () => {
     cy.get(".heading").should("exist").contains("Welcome to the-internet");
     cy.get("h2").should("exist").contains("Available Examples");
   });
 
+  // Test case to check the A/B Testing page
   it("The A/B testing page are available", () => {
     cy.get("a").should("exist").contains("A/B Testing").click({ force: true });
     cy.get("h3").contains("A/B Test");
   });
 
+  // Test case to check the Add/Remove Elements page
   it("The add remove elements works correctly", () => {
     cy.get("a").should("exist").contains("Add/Remove Elements").click();
     cy.get("h3").contains("Add/Remove Elements");
@@ -33,11 +38,13 @@ describe("The Home page features should be works correctly", () => {
     cy.get("#elements > :nth-child(1)").click();
   });
 
+  // Test case to check the Basic Authentication page
   it("The basic authentication login works is available and works correctly", () => {
     cy.visit("https://admin:admin@the-internet.herokuapp.com/basic_auth");
     cy.get("p").should("include.text", "Congratulations");
   });
 
+  // Test case to identify broken images on the page
   it("Should identify broken images", () => {
     // Select all images on the page
     cy.get("img").each(($img) => {
@@ -63,6 +70,7 @@ describe("The Home page features should be works correctly", () => {
     });
   });
 
+  // Test case to check the Form Authentication page
   it("The login form works is available and works correctly", () => {
     cy.get("a").should("exist").contains("Form Authentication").click();
     cy.get("h2").contains("Login Page");
@@ -75,6 +83,7 @@ describe("The Home page features should be works correctly", () => {
     cy.get("h2").contains("Secure Area");
   });
 
+  // Test case to locate the Challenging DOM
   it("Should locate Challenging DOM", () => {
     cy.get("a").should("exist").contains("Challenging DOM").click();
     cy.get("h3").contains("Challenging DOM");
@@ -89,6 +98,7 @@ describe("The Home page features should be works correctly", () => {
       });
   });
 
+  // Test case to check the Checkboxes page
   it("Should the checkbox could be selected", () => {
     cy.get("a").should("exist").contains("Checkboxes").click();
     cy.get("h3").contains("Checkboxes");
@@ -98,12 +108,14 @@ describe("The Home page features should be works correctly", () => {
     cy.get('input[type="checkbox"]').eq("1").should("not.be.checked");
   });
 
+  // Test case to check the Context Menu
   it("The Context Menu should be displayed", () => {
     cy.get("a").should("exist").contains("Context Menu").click();
     cy.get("h3").contains("Context Menu");
     cy.get("#hot-spot").should("is.visible").trigger("contextmenu"); // TODO: is not possible?
   });
 
+  // Test case to check the Disappearing Elements page
   it("Test disappears elements", () => {
     cy.get("a").should("exist").contains("Disappearing Elements").click();
     cy.get("h3").contains("Disappearing Elements");
@@ -121,6 +133,7 @@ describe("The Home page features should be works correctly", () => {
     cy.get("h3").contains("Disappearing Elements");
   });
 
+  // Test case to verify content changes after reload on the Dynamic Content page
   it("Should verify content changes after reload", () => {
     cy.get("a").should("exist").contains("Dynamic Content").click();
     cy.get("h3").contains("Dynamic Content");
@@ -144,6 +157,7 @@ describe("The Home page features should be works correctly", () => {
       });
   });
 
+  // Test case to validate the dynamic control of the feature
   it("Validate the dynamic control of the feature", () => {
     cy.get("a").should("exist").contains("Dynamic Controls").click();
     cy.get("h4").contains("Dynamic Controls");
@@ -170,6 +184,7 @@ describe("The Home page features should be works correctly", () => {
     cy.get("#message").should("is.visible").contains("It's back");
   });
 
+  // Test case to validate the Dynamic Loading page
   it("Validate the Dynamic Loading", () => {
     // Example 1: Element already exists on the page but is hidden
     cy.get("a").should("exist").contains("Dynamic Loading").click();
@@ -193,6 +208,7 @@ describe("The Home page features should be works correctly", () => {
     waitForTextToBeVisible("Hello World!");
   });
 
+  // Test case to test the Entry Ad feature
   it("Test the Entry Ad feature", () => {
     cy.get("a").should("exist").contains("Entry Ad").click();
 
