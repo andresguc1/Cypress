@@ -14,7 +14,7 @@ To get started with this project, follow these steps:
 
 1. Clone this repository to your local machine:
     ```
-    git clone https://github.com/your-username/cypress-practice.git
+    git clone https://github.com/andresguc1/cypress-practice.git
     ```
 
 2. Navigate into the cloned repository:
@@ -27,14 +27,16 @@ To get started with this project, follow these steps:
     npm install
     ```
 
-4. Open Cypress to run tests:
+4. Open Cypress to run tests in console:
     ```
-    npx cypress open
+    npm run test
     ```
+
+    or to execute in cypress UI and debug test cases
+     ```
+    npm run open
+    ```
+    
 
 5. Choose a test file from the Cypress UI and watch the tests run.
-
-## Structure
-
-The repository has the following structure:
 
