@@ -48,7 +48,7 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 
 For any inquiries or feedback, feel free to contact me:
 
-- **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/andresguc/)
+- **LinkedIn**: [andresguc](https://www.linkedin.com/in/andresguc/)
 - **Email**: andresguc at Gmail
 
 ## License
