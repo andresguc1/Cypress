@@ -91,9 +91,30 @@ describe("The Home page features should be works correctly", () => {
     cy.get('input[type="checkbox"]').eq('1').should('not.be.checked');
   });
 
-  it.only("The Context Menu should be displayed", () => {
+  it("The Context Menu should be displayed", () => {
     cy.get("a").should("exist").contains("Context Menu").click();
     cy.get("h3").contains("Context Menu");
     cy.get('#hot-spot').should('is.visible').trigger('contextmenu'); // TODO: is not possible?
+  });
+
+  it("Test disappears elements", () => {
+    cy.get("a").should("exist").contains("Disappearing Elements").click();
+    cy.get("h3").contains("Disappearing Elements");
+    cy.contains('li', 'About').click();
+    cy.get('h1').should('has.text', 'Not Found');
+    cy.go('back')
+    cy.get("h3").contains("Disappearing Elements");
+    cy.contains('li', 'Contact Us').click();
+    cy.get('h1').should('has.text', 'Not Found');
+    cy.go('back')
+    cy.get("h3").contains("Disappearing Elements");
+    cy.contains('li', 'Portfolio').click();
+    cy.get('h1').should('has.text', 'Not Found');
+    cy.go('back')
+    cy.get("h3").contains("Disappearing Elements");
+    cy.contains('li', 'Gallery').should('be.visible').click();
+    cy.get('h1').should('has.text', 'Not Found');
+    cy.go('back')
+    cy.get("h3").contains("Disappearing Elements");
   });
 });
