@@ -117,4 +117,10 @@ describe("The Home page features should be works correctly", () => {
     cy.go('back')
     cy.get("h3").contains("Disappearing Elements");
   });
+
+  it("should work with Dropdown", () => {
+    cy.get("a").should("exist").contains("Dropdown").click();
+    cy.get("h3").contains("Dropdown");
+    cy.get('#dropdown').select('Option 2')
+  });
 });
