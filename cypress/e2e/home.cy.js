@@ -1,3 +1,8 @@
+ // Custom command to wait for text to be visible
+  function waitForTextToBeVisible(text) {
+    cy.contains(text, { timeout: 10000 }).should('be.visible');
+  }
+
 describe("The Home page features should be works correctly", () => {
   beforeEach(() => {
     cy.visit("https://the-internet.herokuapp.com/");
@@ -153,5 +158,24 @@ describe("The Home page features should be works correctly", () => {
     // Reverse changes
     cy.get('@removeButton').click();
     cy.get('#message').should('is.visible').contains("It's back")
+  });
+
+  it("Validate the Dynamic Loading", () => {
+    // Example 1: Element already exists on the page but is hidden
+    cy.get("a").should("exist").contains("Dynamic Loading").click();
+    cy.get("h3").contains("Dynamically Loaded Page Elements");
+    cy.get('[href="/dynamic_loading/1"]').click();
+    cy.get('h4').contains('Example 1: Element on page that is hidden').should('be.visible');
+    cy.get('button').click();
+    waitForTextToBeVisible('Hello World!');
+  
+    // Go back to the previous page to validate Example 2
+    cy.go('back');
+  
+    // Example 2: Element is not on the page and gets added in
+    cy.get('[href="/dynamic_loading/2"]').click();
+    cy.get('h4').contains('Example 2: Element rendered after the fact').should('be.visible');
+    cy.get('button').click();
+    waitForTextToBeVisible('Hello World!');
   });
 });
