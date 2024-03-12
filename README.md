@@ -40,3 +40,5 @@ To get started with this project, follow these steps:
 
 5. Choose a test file from the Cypress UI and watch the tests run.
 
+by Andresguc
+
