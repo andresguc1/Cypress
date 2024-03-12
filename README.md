@@ -40,5 +40,18 @@ To get started with this project, follow these steps:
 
 5. Choose a test file from the Cypress UI and watch the tests run.
 
-by Andresguc
+## Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or create a pull request in this repository.
+
+## Contact
+
+For any inquiries or feedback, feel free to contact me:
+
+- **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/andresguc/)
+- **Email**: andresguc at Gmail
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
 
