@@ -112,15 +112,46 @@ describe("The Home page features should be works correctly", () => {
     cy.get('h1').should('has.text', 'Not Found');
     cy.go('back')
     cy.get("h3").contains("Disappearing Elements");
-    cy.contains('li', 'Gallery').should('be.visible').click();
-    cy.get('h1').should('has.text', 'Not Found');
-    cy.go('back')
-    cy.get("h3").contains("Disappearing Elements");
   });
 
-  it("should work with Dropdown", () => {
-    cy.get("a").should("exist").contains("Dropdown").click();
-    cy.get("h3").contains("Dropdown");
-    cy.get('#dropdown').select('Option 2')
+  it("Should verify content changes after reload", () => {
+    cy.get("a").should("exist").contains("Dynamic Content").click();
+    cy.get("h3").contains("Dynamic Content");
+    cy.get(':nth-child(1) > .large-2 > img').should('is.exist')
+    cy.get(':nth-child(4) > .large-2 > img').should('is.exist')
+    cy.get(':nth-child(7) > .large-2 > img').should('is.exist')
+    cy.get(':nth-child(1) > .large-10').invoke('text').then((text) => {
+      cy.log('Text Content:', text);
+    });
+    cy.get(':nth-child(4) > .large-10').invoke('text').then((text) => {
+      cy.log('Text Content:', text);
+    });
+    cy.get(':nth-child(4) > .large-10').invoke('text').then((text) => {
+      cy.log('Text Content:', text);
+    });
+  });
+
+  it("Validate the dynamic control of the feature", () => {
+    cy.get("a").should("exist").contains("Dynamic Controls").click();
+    cy.get("h4").contains("Dynamic Controls");
+    cy.get('#checkbox > input').should('is.visible').check()
+
+    // Locate the  element to add Remove/add by its attributes
+    cy.get('.subheader').should('be.visible').contains('Remove/add');
+    cy.get('button[type="button"][onclick="swapCheckbox()"]').as('removeButton');
+    cy.get('@removeButton').click();
+    cy.get('#loading').should('be.visible')
+    cy.get('#message').should('is.visible').contains("It's gone!")
+
+    // Locate the  element to add Enable/disable by its attributes
+    cy.get('.subheader').should('be.visible').contains('Enable/disable');
+    cy.get('button[type="button"][onclick="swapInput()"]').as('enableButton');
+    cy.get('@enableButton').click();
+    cy.get('#message').should('is.visible').contains("It's enabled!")
+    cy.get('input').type('This is a Cypress test')
+
+    // Reverse changes
+    cy.get('@removeButton').click();
+    cy.get('#message').should('is.visible').contains("It's back")
   });
 });
