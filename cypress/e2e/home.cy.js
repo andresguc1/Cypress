@@ -90,4 +90,10 @@ describe("The Home page features should be works correctly", () => {
     cy.get('input[type="checkbox"]').eq('1').uncheck();
     cy.get('input[type="checkbox"]').eq('1').should('not.be.checked');
   });
+
+  it.only("The Context Menu should be displayed", () => {
+    cy.get("a").should("exist").contains("Context Menu").click();
+    cy.get("h3").contains("Context Menu");
+    cy.get('#hot-spot').should('is.visible').trigger('contextmenu'); // TODO: is not possible?
+  });
 });
