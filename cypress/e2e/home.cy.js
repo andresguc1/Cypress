@@ -252,7 +252,10 @@ describe("The Home page features should be works correctly", () => {
 
     cy.get("a").should("exist").contains("File Download").click();
     cy.get("h3").contains("File Downloader");
-    cy.contains("a", "Cypress Commands.pdf").click();
+    cy.contains("a", "Cypress Commands.pdf").should('exist').click();
+    cy.wait(3000)
+    cy.log('file downloaded')
+
 
     // TODO: Validate if the file exist on the folder, but how to make assertion about this
 
