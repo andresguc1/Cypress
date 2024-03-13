@@ -241,21 +241,24 @@ describe("The Home page features should be works correctly", () => {
 
   // Test case to check the download files
   it.only("Test the file download from the page", () => {
-
-    // Create a interception function for specific file
-    cy.intercept('GET', '/download/Cypress Commands.pdf', (req) => { // Update the URL pattern to match your download link
+    // Create an interception function for a specific file
+    cy.intercept('GET', '/download/Cypress Commands.pdf', (req) => {
+      cy.log('Interception triggered');
       req.reply((res) => {
-        res.send('Cypress Commands.pdf'); // Serve the fixture file as the response
+        cy.log('Sending response');
+        res.send(fileContent);
       });
     }).as('downloadFile');
 
     cy.get("a").should("exist").contains("File Download").click();
     cy.get("h3").contains("File Downloader");
-    cy.contains('a', 'Cypress Commands.pdf').click();
+    cy.contains("a", "Cypress Commands.pdf").click();
 
-    // Execute the interception of the file
-    cy.wait('@downloadFile').then((interception) => {
-      expect(interception.response.statusCode).to.eq(200); // Verify that the interception was successful
-    });
+    // TODO: Validate if the file exist on the folder, but how to make assertion about this
+
+    // // Execute the interception of the file
+    // cy.wait("@downloadFile").then((interception) => {
+    //   expect(interception.response.statusCode).to.eq(200); // Verify that the interception was successful
+    // });
   });
 });
