@@ -216,7 +216,9 @@ describe("The Home page features should be works correctly", () => {
     cy.get(".modal").should("be.visible");
 
     // Assert the title of the modal
-    cy.get(".modal-title h3").should('be.visible').contains("This is a modal window");
+    cy.get(".modal-title h3")
+      .should("be.visible")
+      .contains("This is a modal window");
 
     // Assert the content of the modal body
     cy.get(".modal-body p").contains(
@@ -232,6 +234,28 @@ describe("The Home page features should be works correctly", () => {
 
     // Re-enable the modal
     cy.get("a").should("exist").contains("click here").click();
-    cy.get(".modal-title h3").should('be.visible').contains("This is a modal window");
+    cy.get(".modal-title h3")
+      .should("be.visible")
+      .contains("This is a modal window");
+  });
+
+  // Test case to check the download files
+  it.only("Test the file download from the page", () => {
+
+    // Create a interception function for specific file
+    cy.intercept('GET', '/download/Cypress Commands.pdf', (req) => { // Update the URL pattern to match your download link
+      req.reply((res) => {
+        res.send('Cypress Commands.pdf'); // Serve the fixture file as the response
+      });
+    }).as('downloadFile');
+
+    cy.get("a").should("exist").contains("File Download").click();
+    cy.get("h3").contains("File Downloader");
+    cy.contains('a', 'Cypress Commands.pdf').click();
+
+    // Execute the interception of the file
+    cy.wait('@downloadFile').then((interception) => {
+      expect(interception.response.statusCode).to.eq(200); // Verify that the interception was successful
+    });
   });
 });
